@@ -1,0 +1,29 @@
+  ################
+  ### node-red ###
+  ################
+  nodered:
+    container_name: node-red
+    network_mode: host
+    image: nodered/node-red
+    restart: unless-stopped
+    user: "0"
+    ports:
+      - 1880:1880
+      - 80:80
+    volumes:
+      - ./nodered/data:/data
+
+  #################
+  ### mosquitto ###
+  #################
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    user: "0"
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto:/mosquitto/
+      - ./services/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
